@@ -1,0 +1,113 @@
+:root {
+  --bg: #f2e9db;
+  --text: #2a2116;
+  --muted: #8a7860;
+  --border: #e4d6bf;
+  --gold: #c9a227;
+  --card: #fffaf2;
+  --shadow: 0 8px 28px rgba(60, 40, 15, 0.12);
+  --shadow-lg: 0 14px 40px rgba(60, 40, 15, 0.16);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px 56px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: -20px;
+}
+.hero {
+  width: 100%;
+  max-width: 680px;
+  margin-bottom: 24px;
+}
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: transparent;
+  filter: drop-shadow(0 16px 40px rgba(90, 60, 20, 0.18));
+}
+.tagline {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  margin-bottom: 36px;
+  min-height: 1.5em;
+}
+
+/* ===== FIXED BUTTON STYLES ===== */
+.google-btn {
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #2a2116 0%, #3d3225 100%);
+  border: none;
+  border-radius: 50px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px rgba(42, 33, 22, 0.28);
+}
+.google-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(42, 33, 22, 0.36);
+}
+.google-btn:active { transform: translateY(0); }
+.google-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+.error {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  color: #b91c1c;
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: 100%;
+  max-width: 300px;
+  display: none;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

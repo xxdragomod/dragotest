@@ -1,0 +1,32 @@
+/* White page canvas for all signed-in routes; content cards keep their own styling. */
+body.page-auto-bet,
+body.page-dashboard,
+body.page-chat,
+body.page-developer,
+body.page-game,
+body.page-gameplay,
+body.page-notifications,
+body.page-prediction,
+body.page-profile,
+body.profile-body-v2.page-profile,
+body.page-status,
+body.page-subscription {
+  --bg: #ffffff;
+  background: #ffffff !important;
+}
+
+/* The shared header is white on every app route, not only the dashboard. */
+body.page-auto-bet .app-topbar,
+body.page-dashboard .app-topbar,
+body.page-chat .app-topbar,
+body.page-developer .app-topbar,
+body.page-game .app-topbar,
+body.page-gameplay .app-topbar,
+body.page-notifications .app-topbar,
+body.page-prediction .app-topbar,
+body.page-profile .app-topbar,
+body.page-status .app-topbar,
+body.page-subscription .app-topbar {
+  background: #ffffff !important;
+  border-bottom-color: #eeeeee !important;
+}

@@ -1,0 +1,5 @@
+/* Common CSS bundle — @import order hi cascade order hai.
+   Original load order: styles.css → dashboard.css */
+@import './styles.css';
+@import './dashboard.css';
+@import './page-theme.css';

@@ -1,0 +1,203 @@
+/* DRAGO public guides — clean white canvas with the existing gold brand accents. */
+html,
+body {
+	min-height: 100%;
+	margin: 0;
+	background: #ffffff;
+	color: #2a2116;
+}
+
+body {
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+.seo-page {
+	min-height: 100vh;
+	background: #ffffff;
+	color: #554a3a;
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	line-height: 1.7;
+	-webkit-font-smoothing: antialiased;
+}
+
+.seo-page ::selection { background: rgba(201, 162, 39, 0.24); }
+
+/* Hero */
+.seo-hero {
+	max-width: 860px;
+	margin: 0 auto;
+	padding: 42px 20px 34px;
+	text-align: center;
+}
+.seo-eyebrow {
+	display: inline-block;
+	margin-bottom: 18px;
+	padding: 6px 14px;
+	border: 1px solid rgba(201, 162, 39, 0.42);
+	border-radius: 50px;
+	color: #896b16;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+.seo-hero h1 {
+	margin: 0 0 16px;
+	color: #2a2116;
+	font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+	font-weight: 800;
+	letter-spacing: -0.01em;
+	line-height: 1.22;
+}
+.seo-hero h1 em {
+	background: linear-gradient(90deg, #b99025, #8f6d16);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	font-style: normal;
+}
+.seo-sub {
+	max-width: 640px;
+	margin: 0 auto 26px;
+	color: #6d6252;
+	font-size: 1.05rem;
+}
+.seo-btn {
+	display: inline-block;
+	padding: 14px 30px;
+	border: 1px solid rgba(139, 105, 20, 0.15);
+	border-radius: 50px;
+	background: linear-gradient(135deg, #f0cd67, #c9a227);
+	box-shadow: 0 8px 22px rgba(201, 162, 39, 0.2);
+	color: #2a2116;
+	font-weight: 800;
+	text-decoration: none;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.seo-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 11px 26px rgba(201, 162, 39, 0.25);
+}
+
+/* Body content */
+.seo-wrap {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 0 20px 60px;
+}
+.seo-wrap h2 {
+	margin: 48px 0 14px;
+	color: #2a2116;
+	font-size: clamp(1.3rem, 3vw, 1.7rem);
+	font-weight: 800;
+	line-height: 1.3;
+}
+.seo-wrap h2 .n {
+	margin-right: 6px;
+	color: #a98118;
+}
+.seo-wrap h3 {
+	margin: 26px 0 8px;
+	color: #463720;
+	font-size: 1.1rem;
+}
+.seo-wrap p { margin: 12px 0; }
+.seo-wrap ul,
+.seo-wrap ol { margin: 12px 0; padding-left: 22px; }
+.seo-wrap li { margin: 7px 0; }
+.seo-wrap a { color: #80610e; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.seo-wrap a:hover { color: #a47d17; }
+.seo-wrap strong { color: #2a2116; }
+
+/* Cards */
+.seo-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 14px;
+	margin: 18px 0;
+}
+.seo-card {
+	padding: 18px;
+	border: 1px solid #eee4d0;
+	border-radius: 16px;
+	background: linear-gradient(160deg, #fffefa, #fffaf0);
+	box-shadow: 0 4px 14px rgba(42, 33, 22, 0.045);
+}
+.seo-card h3 { margin-top: 0; font-size: 1rem; }
+.seo-card .ico { display: block; margin-bottom: 8px; font-size: 1.5rem; }
+.seo-card p { margin: 6px 0 0; color: #6d6252; font-size: 0.94rem; }
+
+/* Table */
+.seo-table-wrap {
+	overflow-x: auto;
+	margin: 16px 0;
+	border: 1px solid #e8dfce;
+	border-radius: 14px;
+	background: #ffffff;
+}
+.seo-table { width: 100%; min-width: 420px; border-collapse: collapse; font-size: 0.95rem; }
+.seo-table th,
+.seo-table td {
+	padding: 11px 14px;
+	border-bottom: 1px solid #eee8dd;
+	text-align: left;
+}
+.seo-table th { background: #fff8e5; color: #6f550d; font-weight: 700; }
+.seo-table tr:last-child td { border-bottom: none; }
+.seo-table td { color: #554a3a; }
+
+/* FAQ */
+.seo-faq {
+	overflow: hidden;
+	margin: 12px 0;
+	border: 1px solid #e8e2d8;
+	border-radius: 14px;
+	background: #ffffff;
+	box-shadow: 0 2px 8px rgba(42, 33, 22, 0.025);
+}
+.seo-faq summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 15px 18px;
+	color: #302719;
+	font-weight: 700;
+	list-style: none;
+	cursor: pointer;
+}
+.seo-faq summary::-webkit-details-marker { display: none; }
+.seo-faq summary::after { color: #9a7516; content: '+'; font-size: 1.3rem; line-height: 1; }
+.seo-faq[open] summary::after { content: '–'; }
+.seo-faq p { margin: 0; padding: 0 18px 16px; color: #625849; }
+
+/* Notice & footer */
+.seo-notice {
+	margin: 38px 0 20px;
+	padding: 16px 18px;
+	border: 1px solid #ebddaF;
+	border-left: 4px solid #c9a227;
+	border-radius: 10px;
+	background: #fff9e8;
+	color: #615235;
+	font-size: 0.92rem;
+}
+.seo-footer {
+	padding: 30px 20px;
+	border-top: 1px solid #eee9df;
+	background: #fafafa;
+	color: #776d5b;
+	font-size: 0.88rem;
+	text-align: center;
+}
+.seo-footer a { margin: 0 10px; color: #80610e; text-decoration: none; }
+.seo-footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.seo-footer .seo-foot-links { margin-bottom: 12px; }
+
+@media (max-width: 520px) {
+	.seo-hero { padding-top: 32px; }
+	.seo-wrap { padding-right: 16px; padding-left: 16px; }
+	.seo-footer .seo-foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; }
+	.seo-footer a { margin: 0; }
+}

@@ -1,0 +1,129 @@
+body.page-notifications {
+  background: #ffffff !important;
+}
+
+body.page-notifications .dash-top {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom-color: #eeeeee;
+}
+
+.notifications-top {
+  gap: 10px;
+}
+
+.notifications-back {
+  display: grid;
+  flex: 0 0 36px;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(195, 151, 42, 0.3);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fffdf8, #fff4d5);
+  color: #79570d;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(147, 107, 18, 0.1);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 150ms ease;
+}
+
+.notifications-back svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+}
+
+.notifications-back:active {
+  transform: scale(0.94);
+}
+
+.notifications-back:focus-visible {
+  outline: 2px solid #c9a227;
+  outline-offset: 3px;
+}
+
+.notifications-title {
+  white-space: nowrap;
+}
+
+.notifications-main {
+  width: 100%;
+  max-width: 720px;
+  min-height: calc(100vh - 58px);
+  margin: 0 auto;
+  padding: 28px clamp(14px, 4vw, 22px) 32px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.notifications-empty-card {
+  display: flex;
+  width: 100%;
+  max-width: 520px;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  margin: 18px auto 0;
+  padding: 30px 22px 26px;
+  box-sizing: border-box;
+  border: 1px solid #efdfb3;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #fffefb, #fff9e9);
+  box-shadow: 0 5px 20px rgba(42, 33, 22, 0.07);
+  text-align: center;
+}
+
+.notifications-empty-icon {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  margin-bottom: 2px;
+  border: 1px solid rgba(195, 151, 42, 0.32);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #fffdf8, #fff0c2);
+  color: #79570d;
+  box-shadow: 0 4px 13px rgba(147, 107, 18, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.notifications-empty-icon svg {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.notifications-eyebrow {
+  color: #ad8015;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.notifications-empty-card h2 {
+  margin: 0;
+  color: #392f1c;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.16rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.notifications-empty-card p {
+  max-width: 330px;
+  margin: 0;
+  color: #756b58;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.notifications-feed:empty {
+  display: none;
+}
+
+@media (max-width: 360px) {
+  .notifications-empty-card {
+    padding: 26px 16px 22px;
+  }
+}

@@ -1,0 +1,6 @@
+# DRAGO PREDICTOR — robots.txt
+# Search engines ko crawl allow hai. (robots.txt ko security/secret-hide ke liye use nahi kiya gaya.)
+User-agent: *
+Allow: /
+
+Sitemap: https://dragopredictor.vercel.app/sitemap.xml

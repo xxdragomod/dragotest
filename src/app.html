@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- Favicon / brand logo (Google search result me link ke aage yahi dikhta hai) -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0b0f1a" />
+  <!-- Warm the authenticated API connection; this does not make an API request or bypass checks. -->
+  <link rel="preconnect" href="https://dragopredictor.onrender.com" crossorigin />
+  <link rel="dns-prefetch" href="//dragopredictor.onrender.com" />
+  <!-- Google Search Console ownership verification -->
+  <meta name="google-site-verification" content="Jh6X_ssc8VhHhU0NkHTwScDj_Er1kV-6Cn8I_Fgh-YE" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; preconnect-src 'self' https://dragopredictor.onrender.com; script-src 'self' 'unsafe-inline' https://unpkg.com https://api.imgbb.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com https://fonts.googleapis.com data:; img-src 'self' https: data: blob: https://i.ibb.co https://*.ibb.co; connect-src 'self' https://dragopredictor.onrender.com https://*.onrender.com https://draw.ar-lottery01.com https://*.ar-lottery01.com https://unpkg.com https://api.imgbb.com; frame-src https: http: blob:; worker-src 'self' blob:; media-src 'self' blob: data:; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests" />
+  <script>
+    // PUBLIC_DRAGO_CONFIG env var se aata hai (Vercel → Environment Variables).
+    // Env missing ho to bhi syntax error na bane — isliye JSON.parse + fallback.
+    (function () {
+      var raw = '%sveltekit.env.PUBLIC_DRAGO_CONFIG%';
+      try {
+        window.__DRAGO_CONFIG__ = raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        window.__DRAGO_CONFIG__ = {};
+      }
+    })();
+  </script>
+  <script>
+    // ─── BAN / BLOCK early check (silent) ──────────────────────────────────
+    // App khulte hi poora content chhupa dete hain. Server se ban-status aata
+    // hai: blocked/banned → bina kuch dikhaye seedha redirect link. ok → reveal.
+    // Matlab banned user ko app ka ek pixel bhi nahi dikhta — sirf redirect.
+    (function () {
+      try {
+        var dev = localStorage.getItem("drago_device");
+        if (!dev) {
+          dev = "d" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+          localStorage.setItem("drago_device", dev);
+        }
+        window.__DRAGO_DEVICE__ = dev;
+        // 1-din session restore: localStorage → sessionStorage (reopen pe login na ho)
+        try {
+          var _lt = localStorage.getItem("drago_token");
+          var _le = localStorage.getItem("drago_token_expiry");
+          if (_lt && _le && Number(_le) > Date.now() && !sessionStorage.getItem("drago_token")) {
+            sessionStorage.setItem("drago_token", _lt);
+            sessionStorage.setItem("drago_token_expiry", _le);
+            var _lu = localStorage.getItem("drago_user");
+            if (_lu) sessionStorage.setItem("drago_user", _lu);
+          }
+        } catch (e) {}
+        var tok = "";
+        try { tok = sessionStorage.getItem("drago_token") || ""; } catch (e) {}
+        var cfg = window.__DRAGO_CONFIG__ || {};
+        var API = (cfg.API_URL && String(cfg.API_URL).indexOf("YOUR-RENDER") === -1)
+          ? String(cfg.API_URL).replace(/\/$/, "")
+          : "https://dragopredictor.onrender.com";
+        var redir = "%sveltekit.env.PUBLIC_DRAGO_BAN_REDIRECT%" || "https://www.google.com/";
+        // 🔒 SECURITY: redirect URL sanitize — sirf safe http(s) URLs, adult /
+        // malicious domains block. (Galat env value se minors ko adult site pe
+        // nahi bhejenge — neutral search page pe jayenge.)
+        try {
+          var rUrl = new URL(redir);
+          if (rUrl.protocol !== "https:" && rUrl.protocol !== "http:") throw new Error("bad");
+          if (/(xhamster|pornhub|xvideos|redtube|onlyfans|stripchat|chaturbate|brazzers|4chan)\./i.test(rUrl.hostname)) {
+            redir = "https://www.google.com/";
+          }
+        } catch (e) { redir = "https://www.google.com/"; }
+        window.__DRAGO_BAN_REDIRECT__ = redir; // guard bhi yahi use karta hai
+
+        // Content chhupa do jab tak check na ho (banned user ko kuch na dikhe)
+        var de = document.documentElement;
+        de.style.visibility = "hidden";
+        var revealed = false;
+        function reveal() { if (!revealed) { revealed = true; de.style.visibility = ""; } }
+        var safety = setTimeout(reveal, 1800); // server slow/offline → content dikha do
+
+        var h = {};
+        if (tok) h["Authorization"] = "Bearer " + tok;
+        fetch(API + "/security/ban-status?device=" + encodeURIComponent(dev), {
+          headers: h,
+          signal: (window.AbortSignal && AbortSignal.timeout) ? AbortSignal.timeout(5000) : undefined
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            clearTimeout(safety);
+            if (j && j.state && j.state !== "ok") {
+              location.replace(redir); // kuch nahi dikhega — seedha redirect
+            } else {
+              reveal();
+            }
+          })
+          .catch(function () { reveal(); });
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    /* No long-press text copy */
+    html, body, body * {
+      -webkit-user-select: none !important;
+      user-select: none !important;
+      -webkit-touch-callout: none !important;
+    }
+    input, textarea, [contenteditable="true"] {
+      -webkit-user-select: text !important;
+      user-select: text !important;
+    }
+  </style>
+  <!-- Structured data (JSON-LD) — honest WebSite + Organization, no fake ratings -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DRAGO PREDICTOR",
+    "alternateName": "DRAGO",
+    "url": "https://dragopredictor.vercel.app/",
+    "description": "DRAGO PREDICTOR provides real-time WinGo 30s live prediction powered by the AI-driven RX1 model, with live results and detailed prediction history.",
+    "inLanguage": "en",
+    "publisher": {
+      "@type": "Organization",
+      "name": "DRAGO PREDICTOR",
+      "url": "https://dragopredictor.vercel.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://dragopredictor.vercel.app/assets/images/drago-logo.png"
+      }
+    }
+  }
+  </script>
+  %sveltekit.head%
+</head>
+<body data-sveltekit-reload data-sveltekit-preload-code="viewport">
+  %sveltekit.body%
+</body>
+</html>

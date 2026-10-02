@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 218" role="img" aria-labelledby="title desc">
+  <title id="title">Select and enable the Auto Bet Pro script</title>
+  <desc id="desc">Kiwi Browser extension setup showing the downloaded DRAGO userscript and its enabled toggle.</desc>
+  <rect width="360" height="218" rx="20" fill="#f5f1e8"/>
+  <circle cx="35" cy="34" r="18" fill="#fff"/><circle cx="324" cy="184" r="21" fill="#e9ddbd"/>
+  <rect x="20" y="34" width="154" height="150" rx="13" fill="#fff" stroke="#e6dfd2" stroke-width="1.5"/>
+  <rect x="20" y="34" width="154" height="28" rx="12" fill="#f7f4ee"/>
+  <text x="33" y="52" font-family="Arial,sans-serif" font-size="8.5" font-weight="800" fill="#30291d">Select script file</text>
+  <rect x="31" y="76" width="132" height="52" rx="8" fill="#fff8e6" stroke="#d4b34e" stroke-width="1.5"/>
+  <rect x="40" y="88" width="20" height="23" rx="4" fill="#ead693"/><text x="50" y="103" text-anchor="middle" font-family="monospace" font-size="7" font-weight="800" fill="#332916">JS</text>
+  <text x="67" y="94" font-family="Arial,sans-serif" font-size="7" font-weight="800" fill="#30291d">DRAGO-AutoBet</text>
+  <text x="67" y="106" font-family="Arial,sans-serif" font-size="7" font-weight="800" fill="#30291d">-Pro.user.js</text>
+  <rect x="87" y="143" width="66" height="23" rx="11.5" fill="#c9a227"/><text x="120" y="158" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="800" fill="#2a2116">Add script</text>
+  <path d="M181 108h16m-6-6 6 6-6 6" fill="none" stroke="#b68d1e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="207" y="34" width="133" height="150" rx="13" fill="#fff" stroke="#e6dfd2" stroke-width="1.5"/>
+  <rect x="207" y="34" width="133" height="28" rx="12" fill="#f7f4ee"/>
+  <text x="220" y="52" font-family="Arial,sans-serif" font-size="8.5" font-weight="800" fill="#30291d">Extensions</text>
+  <rect x="218" y="76" width="111" height="62" rx="9" fill="#faf9f6" stroke="#e9e3d8"/>
+  <rect x="227" y="88" width="24" height="24" rx="6" fill="#ead693"/><text x="239" y="103.5" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" font-weight="800" fill="#332916">DR</text>
+  <text x="258" y="96" font-family="Arial,sans-serif" font-size="7.5" font-weight="800" fill="#30291d">Auto Bet Pro</text>
+  <text x="258" y="108" font-family="Arial,sans-serif" font-size="6.5" fill="#777">DRAGO script</text>
+  <text x="221" y="159" font-family="Arial,sans-serif" font-size="7" font-weight="700" fill="#5d564a">Enabled</text>
+  <rect x="291" y="149" width="34" height="19" rx="9.5" fill="#3284dc"/><circle cx="315" cy="158.5" r="7" fill="#fff"/>
+  <path d="m296 114 4 4 8-9" fill="none" stroke="#369762" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
