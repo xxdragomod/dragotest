@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DRAGO Auto Bet Pro
 // @namespace    http://tampermonkey.net/
-// @version      7.3.0
+// @version      7.4.0
 // @description  WinGo 30s auto-bet widget for games opened inside DRAGO Gameplay. Requires an eligible DRAGO Pro plan.
 // @downloadURL  https://dragotest.vercel.app/autobet-pro.user.js
 // @updateURL    https://dragotest.vercel.app/autobet-pro.user.js
@@ -525,6 +525,7 @@ function retryCheck() {
       currentChoice = pred === 'BIG' ? 'Big' : 'Small';
       const level = data.level || 1;
 
+      refreshLiveBaseBet('bet se pehle');
       effectiveBetAmount = betAmount * Math.pow(2, Math.min(level, maxLevelUser) - 1);
 
       if (!checkBalanceGuard(effectiveBetAmount)) { isExecutingSequence = false; return; }
@@ -645,6 +646,41 @@ function retryCheck() {
    
    
    
+  // ═══════════════════════════════════════════════════════════
+  //  LIVE BASE BET: session ke beech balance badhe to base bet
+  //  (aur usi hisaab se HAR level ka amount) live badh jata hai.
+  //  Base kabhi live ghatega nahi — martingale recovery bigadti
+  //  nahi, aur low-balance guard pehle jaisa hi kaam karta hai.
+  // ═══════════════════════════════════════════════════════════
+  function ladderNeed() {
+    return Math.pow(2, maxLevelUser) - 1;
+  }
+
+  function baseFromBalance(bal) {
+    const need = ladderNeed();
+    if (!(bal >= need)) return 0;
+    return Math.floor(bal / need);
+  }
+
+  function renderBaseBet() {
+    const el = sGet('abp-base-bet');
+    if (el) el.textContent = '₹' + Number(betAmount || 1).toLocaleString('en-IN');
+  }
+
+  function refreshLiveBaseBet(reason) {
+    if (!isRunning) return betAmount;
+    const bal = readBalance();
+    if (bal === null || !isFinite(bal)) return betAmount;
+    const newBase = baseFromBalance(bal);
+    if (newBase > betAmount) {
+      const old = betAmount;
+      betAmount = newBase;
+      renderBaseBet();
+      log('💰 Balance ₹' + bal.toLocaleString('en-IN', { maximumFractionDigits: 2 }) + ' — Base Bet LIVE badha: ₹' + old + ' → ₹' + betAmount + ' (sab levels ka amount isi hisaab se badhega)');
+    }
+    return betAmount;
+  }
+
   function start() {
     if(isRunning) return;
 
@@ -666,14 +702,15 @@ function retryCheck() {
       return;
     }
 
-    const need = Math.pow(2, maxLevelUser) - 1;
+    const need = ladderNeed();
     if (bal < need) {
       log('🛑 ' + maxLevelUser + ' level ke liye minimum ₹' + need + ' chahiye.');
       alert('Amount abhi pura nahi hai, ' + maxLevelUser + ' level maintain karne ke liye wallet me kam se kam ₹' + need + ' hone chahiye.');
       return;
     }
 
-    betAmount = Math.floor(bal / need);
+    betAmount = baseFromBalance(bal);
+    renderBaseBet();
 
     if (!window.confirm('Auto Bet will place real bets using the game wallet. Losses are possible and DRAGO does not control the game balance. Start Auto Bet?')) {
       log('⏸ Start cancelled');
@@ -838,6 +875,7 @@ function retryCheck() {
     if(el) el.textContent = bal !== null ? '₹' + bal.toLocaleString('en-IN', {minimumFractionDigits: 2}) : '—';
     const cel = sGet('abp-c-balance');
     if(cel) cel.textContent = bal !== null ? '₹' + bal.toLocaleString('en-IN', {minimumFractionDigits: 2}) : '—';
+    if (isRunning) refreshLiveBaseBet('live balance');
   }
 
    
@@ -1253,6 +1291,7 @@ function retryCheck() {
 
           <div class="abp-card abp-stake-card">
             <div class="abp-flex-row"><span class="abp-label-sm">BALANCE</span><span class="val-bold" id="abp-balance">₹0.00</span></div>
+            <div class="abp-flex-row"><span class="abp-label-sm">BASE BET · LIVE</span><span class="val-bold" id="abp-base-bet">₹1</span></div>
             <div class="lvl-wrap">
               <span class="abp-label-sm">STAKE LEVELS</span><span class="abp-input-help">Balance is split across the selected levels.</span>
               <div class="abp-level-heading"><span>1</span><output id="abp-level-value" for="abp-level-slider">Lv 9</output><span>9</span></div>
@@ -1373,6 +1412,7 @@ function retryCheck() {
     makeDraggable(ball, ball, 'abp_pos_ball');
 
     updateBalanceDisplay();
+    renderBaseBet();
     setInterval(updateBalanceDisplay, 5000);
 
     loadState(() => {
